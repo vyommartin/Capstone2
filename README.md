@@ -7,4 +7,4 @@ The idea behind the web app was that if Convolutional Neural Networks are so goo
 The Dataset on which the model was trained on consisted of 2259 images with 10 categories. The model was trained using the DenseNet121 CNN Architecture.
 
 This is the second Computer Vision project that I have worked on where all the data used was straight away scrapped from Public accounts of the people and from google images. I do not own the rights to any of these images but if you want to use them the link is below:
-
+https://drive.google.com/drive/folders/11YjzuQC5ra0ewFGyoTBOowgZNWnZjco-?usp=sharing
