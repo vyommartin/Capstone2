@@ -2,13 +2,14 @@ import aiohttp
 import asyncio
 import uvicorn
 import numpy #
-from fastai import *
-from fastai.vision import *
 from io import BytesIO
 from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
+from fast_bert.data_cls import BertDataBunch
+from fast_bert.learner_cls import BertLearner
+from fast_bert.metrics import accuracy
 
 export_file_url = 'https://www.googleapis.com/drive/v3/files/1-46Jl_ZLstBUgfDX3A39zuuLLdtX5BrB?alt=media&key=AIzaSyDxvX7eErCuHbuZNAOXKKCHL_eRCynOq_I'
 export_file_name = 'export.pkl'
@@ -20,7 +21,9 @@ classes = ['Jacob Elordi or Noah',
  'Meganne Young or Rachel',
  'Molly Ringwald known or Sara Flynn',
  'Taylor Zakhar Perez or Marco']
-path = Path(__file__).parent
+
+path = Path('/opt/render/project/src/') 
+#path = Path(__file__).parent
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
@@ -39,7 +42,24 @@ async def download_file(url, dest):
 async def setup_learner():
     await download_file(export_file_url, path / export_file_name)
     try:
-        learn = load_learner(path, export_file_name)
+        data_bunch = BertDataBunch(path, path,
+                           tokenizer = path,
+                           train_file = None,
+                           val_file = None,
+                           label_file = 'l2.csv',
+                           batch_size_per_gpu = 120,
+                           max_seq_length = 40,
+                           multi_gpu = False,
+                           multi_label = False,
+                           model_type = 'bert') 
+        
+        learn = BertLearner.from_pretrained_model(data_bunch, 
+                                            pretrained_path = path,
+                                            metrics = [],
+                                            device = 'cpu',
+                                            logger = None,
+                                            output_dir = None,
+                                            is_fp16 = False)
         return learn
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
@@ -64,12 +84,16 @@ async def homepage(request):
 
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
-    img_data = await request.form()
-    img_bytes = await (img_data['file'].read())
-    img = open_image(BytesIO(img_bytes))
-    prediction, pred_idx, probs = learn.predict(img)
-    probability = str(round(float((max(probs)*100).numpy()), 2)) + "%"
-    return JSONResponse({'result': str(prediction), 'probability': str(probability)})
+ text = await request.form()
+ preds = learner.predict_batch([text])
+  #  img_data = await request.form()
+     
+#    img_bytes = await (img_data['file'].read())
+ #   img = open_image(BytesIO(img_bytes))
+  #  prediction, pred_idx, probs = learn.predict(img)
+  #  probability = str(round(float((max(probs)*100).numpy()), 2)) + "%"
+  
+    return JSONResponse({'result': str(preds), 'probability': str(probability)})
  
 
 
