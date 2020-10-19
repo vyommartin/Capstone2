@@ -51,15 +51,17 @@ async def setup_learner():
                            max_seq_length = 40,
                            multi_gpu = False,
                            multi_label = False,
-                           model_type = None) 
+                           model_type = None)
+        model = load_model(data_bunch, path, path / export_file_name, device = "cpu", multi_label = False)
         
-        learn = BertLearner.from_pretrained_model(data_bunch, 
-                                            pretrained_path = path,
-                                            metrics = [],
-                                            device = 'cpu',
-                                            logger = None,
-                                            output_dir = None,
-                                            is_fp16 = False)
+        learn = BertLearner
+        #learn = BertLearner.from_pretrained_model(data_bunch, 
+                                            #pretrained_path = path,
+                                            #metrics = [],
+                                            #device = 'cpu',
+                                            #logger = None,
+                                            #output_dir = None,
+                                            #is_fp16 = False)
         return learn
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
