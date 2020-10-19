@@ -85,14 +85,15 @@ async def homepage(request):
 async def analyze(request):
  text = await request.form()
  preds = learner.predict_batch([text])
-  #  img_data = await request.form()
+ return JSONResponse({'result': str(preds), 'probability': str(probability)})
+       
+ #  img_data = await request.form()
      
 #    img_bytes = await (img_data['file'].read())
  #   img = open_image(BytesIO(img_bytes))
   #  prediction, pred_idx, probs = learn.predict(img)
   #  probability = str(round(float((max(probs)*100).numpy()), 2)) + "%"
   
-    return JSONResponse({'result': str(preds), 'probability': str(probability)})
  
 
 
