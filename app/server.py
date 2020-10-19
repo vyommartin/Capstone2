@@ -40,7 +40,7 @@ async def download_file(url, dest):
 
 
 async def setup_learner():
-    await download_file(export_file_url, path)
+    await download_file(export_file_url, path / export_file_name)
     try:
         data_bunch = BertDataBunch(path, path,
                            tokenizer = path,
