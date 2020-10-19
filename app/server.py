@@ -11,8 +11,8 @@ from fast_bert.data_cls import BertDataBunch
 from fast_bert.learner_cls import BertLearner
 from fast_bert.metrics import accuracy
 
-export_file_url = 'https://www.googleapis.com/drive/v3/files/1-46Jl_ZLstBUgfDX3A39zuuLLdtX5BrB?alt=media&key=AIzaSyDxvX7eErCuHbuZNAOXKKCHL_eRCynOq_I'
-export_file_name = 'export.pkl'
+export_file_url = "https://www.googleapis.com/drive/v3/files/1-00f28mlffM2uPJVJDY94K1aOy9LfJw1?alt=media&key=AIzaSyArebv-g7_CgQUjKftzGkgeHhtHivaR4TA"
+export_file_name = 'pytorch_model.bin'
 
 classes = ['Jacob Elordi or Noah',
  'Joel Courtney or Lee',
@@ -22,8 +22,7 @@ classes = ['Jacob Elordi or Noah',
  'Molly Ringwald known or Sara Flynn',
  'Taylor Zakhar Perez or Marco']
 
-path = Path('/opt/render/project/src/') 
-#path = Path(__file__).parent
+path = Path(__file__).parent
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
