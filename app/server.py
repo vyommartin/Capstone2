@@ -51,7 +51,7 @@ async def setup_learner():
                            max_seq_length = 40,
                            multi_gpu = False,
                            multi_label = False,
-                           model_type = 'bert') 
+                           model_type = None) 
         
         learn = BertLearner.from_pretrained_model(data_bunch, 
                                             pretrained_path = path,
