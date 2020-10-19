@@ -34,15 +34,15 @@ async def setup_learner():
     await download_file(export_file_url, path / export_file_name)
     try:
         data_bunch = BertDataBunch(path, path,
-                           tokenizer = path,
-                           train_file = None,
-                           val_file = None,
-                           label_file = 'l2.csv',
-                           batch_size_per_gpu = 120,
-                           max_seq_length = 40,
-                           multi_gpu = False,
-                           multi_label = False,
-                           model_type = None)
+                                   tokenizer = path,
+                                   train_file = None,
+                                   val_file = None,
+                                   label_file = 'l2.csv',
+                                   batch_size_per_gpu = 120,
+                                   max_seq_length = 40,
+                                   multi_gpu = False,
+                                   multi_label = False,
+                                   model_type = None)
         model = load_model(data_bunch, path, path / export_file_name, device = "cpu", multi_label = False)
         learn = BertLearner(data_bunch, model, path, metrics = [], output_dir = None, device = 'cpu', logger = None)
         #learn = BertLearner.from_pretrained_model(data_bunch, 
