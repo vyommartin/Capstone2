@@ -9,8 +9,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 from fast_bert.data_cls import BertDataBunch
-from fast_bert.learner_cls import BertLearner
-from fast_bert.learner_cls import load_model
+from fast_bert.learner_cls import BertLearner, load_model
 
 export_file_url = "https://www.googleapis.com/drive/v3/files/1-00f28mlffM2uPJVJDY94K1aOy9LfJw1?alt=media&key=AIzaSyArebv-g7_CgQUjKftzGkgeHhtHivaR4TA"
 export_file_name = 'pytorch_model.bin'
