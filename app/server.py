@@ -10,18 +10,10 @@ from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 from fast_bert.data_cls import BertDataBunch
 from fast_bert.learner_cls import BertLearner
-from fast_bert.metrics import accuracy
+from fast_bert.learner_cls import load_model
 
 export_file_url = "https://www.googleapis.com/drive/v3/files/1-00f28mlffM2uPJVJDY94K1aOy9LfJw1?alt=media&key=AIzaSyArebv-g7_CgQUjKftzGkgeHhtHivaR4TA"
 export_file_name = 'pytorch_model.bin'
-
-classes = ['Jacob Elordi or Noah',
- 'Joel Courtney or Lee',
- 'Joey King or Elle',
- 'Maise Richardson-sellers or Chloe',
- 'Meganne Young or Rachel',
- 'Molly Ringwald known or Sara Flynn',
- 'Taylor Zakhar Perez or Marco']
 
 path = Path('app/')
 
@@ -53,8 +45,7 @@ async def setup_learner():
                            multi_label = False,
                            model_type = None)
         model = load_model(data_bunch, path, path / export_file_name, device = "cpu", multi_label = False)
-        
-        learn = BertLearner
+        learn = BertLearner(data_bunch, model, path, metrics = [], output_dir = None, device = 'cpu', logger = None)
         #learn = BertLearner.from_pretrained_model(data_bunch, 
                                             #pretrained_path = path,
                                             #metrics = [],
