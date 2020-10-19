@@ -11,7 +11,7 @@ from starlette.staticfiles import StaticFiles
 from fast_bert.data_cls import BertDataBunch
 from fast_bert.learner_cls import *
 
-export_file_url = "https://www.googleapis.com/drive/v3/files/1-00f28mlffM2uPJVJDY94K1aOy9LfJw1?alt=media&key=AIzaSyArebv-g7_CgQUjKftzGkgeHhtHivaR4TA"
+export_file_url = "https://www.googleapis.com/drive/v3/files/1KjrRxptv78tXKGYCE-B6EsRJ2e8YkUDm?alt=media&key=AIzaSyCNoRufM9Z-HSsX566HZv-Qj2shWUI7BBs"
 export_file_name = 'pytorch_model.bin'
 
 path = Path('app/')
