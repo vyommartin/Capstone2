@@ -11,4 +11,4 @@ starlette==0.13.6
 uvicorn==0.11.7
 fast-bert==1.9.1
 pathlib==1.0.1
-transformers==3.0.2
+transformers==3.0.1
