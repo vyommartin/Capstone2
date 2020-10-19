@@ -23,7 +23,7 @@ classes = ['Jacob Elordi or Noah',
  'Molly Ringwald known or Sara Flynn',
  'Taylor Zakhar Perez or Marco']
 
-path = Path(__file__).parent
+path = Path('/opt/render/project/src/app/')
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
