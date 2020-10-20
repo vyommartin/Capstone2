@@ -15,11 +15,11 @@ import sys
 export_file_url = "https://www.googleapis.com/drive/v3/files/1KjrRxptv78tXKGYCE-B6EsRJ2e8YkUDm?alt=media&key=AIzaSyCNoRufM9Z-HSsX566HZv-Qj2shWUI7BBs"
 export_file_name = 'pytorch_model.bin'
 
-path = Path('app/')
+path = Path('/root/Capstone2/app/')
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
-app.mount('/static', StaticFiles(directory='app/static'))
+app.mount('/static', StaticFiles(directory='/root/Capstone2/app/static'))
 
 
 async def download_file(url, dest):
