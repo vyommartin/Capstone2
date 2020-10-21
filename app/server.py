@@ -6,7 +6,7 @@ from io import BytesIO
 from pathlib import Path
 from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
-from starlette.responses import HTMLResponse, JSONResponse
+from flask import render_template, request, redirect, jsonify
 from starlette.staticfiles import StaticFiles
 from fast_bert.data_cls import BertDataBunch
 from fast_bert.learner_cls import *
@@ -26,8 +26,7 @@ app.mount('/static', StaticFiles(directory='/root/Capstone2/app/static'))
 
 @app.route('/')
 async def homepage(request):
-    html_file = path / 'view' / 'index.html'
-    return HTMLResponse(html_file.open().read())
+    return render_template('/view/index.html')
 
 
 @app.route('/analyze', methods=['POST'])
@@ -49,7 +48,7 @@ async def analyze(request):
 
     text = request.form.get('text')
     preds = learner.predict_batch([text])
-    return JSONResponse({'result': str(preds), 'probability': str(probability)})
+    return render_template('/view/index.html', results=preds)
 
 
 if __name__ == '__main__':
