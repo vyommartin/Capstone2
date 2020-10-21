@@ -47,7 +47,7 @@ async def analyze(request):
     model = await load_model(data_bunch, path, path / export_file_name, device = "cpu", multi_label = False)
     learner = await BertLearner(data_bunch, model, path, metrics = [], output_dir = None, device = 'cpu', logger = None)
 
-    text = await request.form()
+    text = request.form.get('text')
     preds = learner.predict_batch([text])
     return JSONResponse({'result': str(preds), 'probability': str(probability)})
 
