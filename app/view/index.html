@@ -1,31 +1,28 @@
-<html lang='en'>
+  GNU nano 4.8                                                                     index.html                                                                               <html lang='en'>
 <head>
   <meta charset='utf-8'>
-  <link rel='stylesheet' href='/root/Capstone2/app/static/style.css'>
-  <script src='/root/Capstone2/app/static/client.js'></script>
+  <link rel='stylesheet' href='static/style.css'>
+  <script src='static/client.js'></script>
 </head>
 <body>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 <div>
   <div class='center'>
     <div class='title'>
-      BERT based sentiment classifier 💃</div>
-    <div class='content'>
-      <div class='no-display'>
-        <input id='file-input'
-               class='no-display'
-               type='text'
-               name='file'
-               onchange='showPicked(this)'>
-      </div>
-      
+      sentiment classifier
+    </div>
+<div class='content'>
+      <div class= 'text'><form method='post' >
+        <input id='text' type='text' name='file'>
+      </form></div>
+
       <div class='analyze'>
         <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Analyze</button>
       </div>
       <div class='result-label'>
         <label id='result-label'></label>
       </div>
-      
+
     </div>
   </div>
 </div>
